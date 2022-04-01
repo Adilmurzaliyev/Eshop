@@ -12,11 +12,15 @@
     <div class="container">
         <div class="col-10 mx-auto mt-3">
             <div class="row">
-                <div class="col-6">
-                    <h1>Product List</h1>
+                <div class="col-3">
+                    <h2>Product List</h2>
                 </div>
-                <div class="col-6">
+                <div class="col-9">
                     <form class="form-inline" th:method="get">
+                        <input type="number" th:value="${param.min}" class="form-control-md"
+                               id="min" name="min" placeholder="Min">
+                        <input type="number" th:value="${param.max}" class="form-control-md"
+                               id="max" name="max" placeholder="Max">
                         <input type="text" th:value="${param.titleFilter}" class="form-control-md"
                                id="title-filter" name="titleFilter" placeholder="Find">
                         <button type="submit" class="btn btn-outline-dark"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -35,7 +39,7 @@
                  </tr>
             </thead>
             <tbody>
-                <tr th:each="product : ${products}">
+                <tr th:unless="${products.isEmpty()}" th:each="product : ${products}">
                     <td th:text="${product.id}"/>
                     <td th:text="${product.title}"/>
                     <td th:text="${product.description}"/>
@@ -47,8 +51,50 @@
                             <i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
+
+            <tr>
+                <tr th:if="${products.isEmpty()}">
+                    <td colspan="5">No Data</td>
+            </tr>
             </tbody>
         </table>
+        </div>
+
+        <div th:if="${products.hasContent()}">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:if="${products.hasPrevious()}">
+                        <a class="page-link" th:href="@{/products(
+                        page=${products.number},
+                        size=${products.size},
+                        titleFilter=${param.titleFilter},
+                        minPrice=${param.min},
+                        maxPrice=${param.max}
+                        )}">Previous</a>
+                    </li>
+                    <li th:each="num : ${#numbers.sequence(1, products.totalPages)}"
+                        class="page-item"
+                        th:classappend="${num == products.number + 1} ? 'active'">
+                        <a class="page-link" th:href="@{/products(
+                        page=${num},
+                        size=${products.size},
+                        titleFilter=${param.titleFilter},
+                        minPrice=${param.min},
+                        maxPrice=${param.max}
+                        )}">[[${num}]]</a>
+                    </li>
+                    <li class="page-item" th:if="${products.hasNext()}">
+                        <a class="page-link" th:href="@{/products(
+                        page=${products.number+2},
+                        size=${products.size},
+                        titleFilter=${param.titleFilter},
+                        minPrice=${param.min},
+                        maxPrice=${param.max}
+                        )}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
     </div>
 
