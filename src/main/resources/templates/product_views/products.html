@@ -10,6 +10,20 @@
 
 <body>
     <div class="container">
+        <div class="col-10 mx-auto mt-3">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Product List</h1>
+                </div>
+                <div class="col-6">
+                    <form class="form-inline" th:method="get">
+                        <input type="text" th:value="${param.titleFilter}" class="form-control-md"
+                               id="title-filter" name="titleFilter" placeholder="Find">
+                        <button type="submit" class="btn btn-outline-dark"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <a class="btn btn-outline-dark" th:href="@{/products/new}">Add product</a>
+                    </form>
+                </div>
+            </div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -17,6 +31,7 @@
                     <th>Title</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Actions</th>
                  </tr>
             </thead>
             <tbody>
@@ -25,9 +40,18 @@
                     <td th:text="${product.title}"/>
                     <td th:text="${product.description}"/>
                     <td th:text="${product.price}"/>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/products/{id}(id=${product.id})}">
+                            <i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" th:href="@{/products/delete/{id}(id=${product.id})}">
+                            <i class="fa-solid fa-trash-can"></i></a>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
+
+    <script src="https://kit.fontawesome.com/450f773c4b.js" crossorigin="anonymous"></script>
 </body>
 </html>
