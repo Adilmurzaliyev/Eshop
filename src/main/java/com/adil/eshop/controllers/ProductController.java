@@ -54,21 +54,10 @@ public class ProductController {
         return "redirect:/products";
     }
 
-//    @GetMapping("/new")
-//    public String newProduct(Model model) {
-//        model.addAttribute(new Product());
-//        return "product_views/product_add_form";
-//    }
     @GetMapping("/new")
-    public String newProduct() {
-
-        return "product_views/product_add_form";
-    }
-
-    @PostMapping("/add_new")
-    public String addNewProduct(Product product) {
-        productService.addProduct(product);
-        return "redirect:/products";
+    public String newProduct(Model model, Product product) {
+        model.addAttribute("products", product);
+        return "product_views/product_form";
     }
 
     @GetMapping("/delete/{id}")

@@ -46,11 +46,6 @@ public class ProductService {
     }
 
     @Transactional
-    public void addProduct(Product product) {
-        productRepository.save(product);
-    }
-
-    @Transactional
     public Page<Product> getByParams(Optional<String> nameFilter,
                                      Optional<BigDecimal> min,
                                      Optional<BigDecimal> max,

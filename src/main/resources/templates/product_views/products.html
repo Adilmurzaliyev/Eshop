@@ -31,7 +31,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th th:include="fragments/sort_header :: sort_header ('Id', 'id')">ID</th>
+<!--                    <th th:include="fragments/sort_header :: sort_header ('Id', 'id')">ID</th>-->
                     <th th:include="fragments/sort_header :: sort_header ('Title', 'title')">Title</th>
                     <th th:include="fragments/sort_header :: sort_header ('Description', 'description')">Description</th>
                     <th th:include="fragments/sort_header :: sort_header ('Price', 'price')">Price</th>
@@ -40,7 +40,7 @@
             </thead>
             <tbody>
                 <tr th:unless="${products.isEmpty()}" th:each="product : ${products}">
-                    <td th:text="${product.id}"/>
+<!--                    <td th:text="${product.id}"/>-->
                     <td th:text="${product.title}"/>
                     <td th:text="${product.description}"/>
                     <td th:text="${product.price}"/>
