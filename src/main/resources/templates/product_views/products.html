@@ -31,10 +31,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
+                    <th th:include="fragments/sort_header :: sort_header ('Id', 'id')">ID</th>
+                    <th th:include="fragments/sort_header :: sort_header ('Title', 'title')">Title</th>
+                    <th th:include="fragments/sort_header :: sort_header ('Description', 'description')">Description</th>
+                    <th th:include="fragments/sort_header :: sort_header ('Price', 'price')">Price</th>
                     <th>Actions</th>
                  </tr>
             </thead>
@@ -68,8 +68,8 @@
                         page=${products.number},
                         size=${products.size},
                         titleFilter=${param.titleFilter},
-                        minPrice=${param.min},
-                        maxPrice=${param.max}
+                        min=${param.min},
+                        max=${param.max}
                         )}">Previous</a>
                     </li>
                     <li th:each="num : ${#numbers.sequence(1, products.totalPages)}"
@@ -79,8 +79,8 @@
                         page=${num},
                         size=${products.size},
                         titleFilter=${param.titleFilter},
-                        minPrice=${param.min},
-                        maxPrice=${param.max}
+                        min=${param.min},
+                        max=${param.max}
                         )}">[[${num}]]</a>
                     </li>
                     <li class="page-item" th:if="${products.hasNext()}">
@@ -88,8 +88,8 @@
                         page=${products.number+2},
                         size=${products.size},
                         titleFilter=${param.titleFilter},
-                        minPrice=${param.min},
-                        maxPrice=${param.max}
+                        min=${param.min},
+                        max=${param.max}
                         )}">Next</a>
                     </li>
                 </ul>

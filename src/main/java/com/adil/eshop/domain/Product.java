@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,5 +29,8 @@ public class Product {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @ManyToMany(mappedBy = "products")
+    private List<User> users;
 
 }

@@ -64,6 +64,11 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.29.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.8</version>
+        </dependency>
     </dependencies>
 
     <build>

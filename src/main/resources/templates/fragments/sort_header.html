@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-</body>
+<th scope="col" th:fragment="sort_header (header, column)">[[${header}]]
+    <a th:href="@{/products(
+    page=${products.number+1},
+    size=${products.size},
+    titleFilter=${param.titleFilter},
+    min=${param.min},
+    max=${param.max},
+    sortField=${column},
+    sortOrder=${param.sortField != null && param.sortOrder != null && param.sortField[0] == column
+    && param.sortOrder[0] == 'ASC' ? 'DESC' : 'ASC'})}">
+        <i th:unless="${param.sortField != null && param.sortOrder != null && param.sortField[0] == column}"
+           class="fa fa-sort"></i>
+        <i th:if="${param.sortField != null && param.sortOrder != null && param.sortField[0] == column}"
+           th:class="'fa fa-sort-' + ${param.sortField[0] == column && param.sortOrder == 'ASC' ? 'down' : 'up'}"></i>
+    </a>
+
+</th>
 </html>
