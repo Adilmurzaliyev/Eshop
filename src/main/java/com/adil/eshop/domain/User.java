@@ -1,14 +1,12 @@
 package com.adil.eshop.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -20,10 +18,10 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "login")
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -33,4 +31,13 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     List<Product> products;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    List<Role> roles;
+
 }

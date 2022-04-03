@@ -45,7 +45,11 @@ public class UserRestController {
 
     @PutMapping(consumes = "application/json", produces = "application/json")
     public User updateUser(@RequestBody User user) {
-        return userService.createOrUpdate(user);
+        if (userService.existById(user.getId())){
+           userService.createOrUpdate(user);
+           return user;
+        }
+        throw  new NotFoundExceptions();
     }
 
     @DeleteMapping("/{id}/id")
