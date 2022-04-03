@@ -1,5 +1,6 @@
 package com.adil.eshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Role {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 }

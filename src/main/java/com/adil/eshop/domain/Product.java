@@ -1,5 +1,6 @@
 package com.adil.eshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private List<User> users;
 
