@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @PostMapping("/product_update")
-    public String updateProduct(Product product) {
+    public String createOrUpdateProduct(Product product) {
         productService.addOrUpdate(product);
         return "redirect:/products";
     }
