@@ -42,7 +42,7 @@ public class ProductController {
         return "product_views/products";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String editProduct(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("products", productService.getById(id).orElseThrow(NotFoundExceptions::new));
         return "product_views/product_form";
